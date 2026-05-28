@@ -20,8 +20,10 @@ public class User {
     public String username;
     public String email;
     public String passwordHash;
+    public String authProvider;
+    public String externalId;
     public LocalDateTime createdAt;
 
-    @ManyToMany(mappedBy = "attendees")
-    public List<Event> events;
+    
+ 
 }

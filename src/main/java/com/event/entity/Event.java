@@ -21,6 +21,7 @@ public class Event {
     public Long id;
 
     public String name;
+    public String websiteUrl;
     public LocalDateTime eventDate;
     public boolean isFree;
     public LocalDateTime createdAt;
@@ -37,6 +38,6 @@ public class Event {
     @ManyToMany
     public List<Tag> tags;
 
-    @ManyToMany
-    public List<User> attendees;
+    
+   
 }
