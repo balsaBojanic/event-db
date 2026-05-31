@@ -40,6 +40,8 @@ public class Event {
     @ManyToMany(fetch = FetchType.LAZY)
     public List<Tag> tags;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<UploadedFile> uploadedFiles;
     
    
 }

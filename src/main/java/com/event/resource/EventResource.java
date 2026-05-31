@@ -17,7 +17,15 @@ import jakarta.ws.rs.core.Response;
 import io.quarkus.security.Authenticated;
 import jakarta.annotation.security.RolesAllowed;
 import java.time.LocalDateTime;
+import com.event.service.FileUploadService;
+import jakarta.ws.rs.core.MediaType;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+import org.jboss.resteasy.plugins.providers.multipart.InputPart;
+import java.io.InputStream;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 @Path("/events")
 @Produces(MediaType.APPLICATION_JSON)
@@ -69,5 +77,36 @@ public class EventResource {
     public Response create(Event event) {
         return Response.ok(eventService.create(event)).status(201).build();
         
+    }
+    @Inject
+    FileUploadService fileUploadService;
+
+    @POST
+    @Path("/upload")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response uploadFile(
+            @QueryParam("eventId") Long eventId,
+            MultipartFormDataInput input) {
+        try {
+            Map<String, List<InputPart>> formParts = input.getFormDataMap();
+
+            String fileName = formParts.get("filename")
+                    .get(0).getBodyAsString();
+
+            InputStream fileStream = formParts.get("file")
+                    .get(0).getBody(InputStream.class, null);
+
+            return fileUploadService.uploadFile(eventId, fileName, fileStream);
+
+        } catch (Exception e) {
+            return Response.serverError()
+                    .entity("Upload failed: " + e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/{id}/files")
+    public Response getEventWithFiles(@PathParam("id") Long id) {
+        return Response.ok(fileUploadService.getEventWithFiles(id)).build();
     }
 }
