@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.FetchType;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,6 @@ public class Location {
     public Double latitude;
     public Double longitude;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     public List<Event> events;
 }

@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.FetchType;
 import java.util.List;
 
 @Entity
@@ -24,6 +26,7 @@ public class User {
     public String externalId;
     public LocalDateTime createdAt;
 
-    
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    public UserProfile profile;
  
 }

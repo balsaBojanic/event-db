@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user_event_rsvp")
@@ -16,9 +17,11 @@ public class UserEventRSVP {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @JsonIgnore
     @ManyToOne
     public User user;
 
+    @JsonIgnore
     @ManyToOne
     public Event event;
 

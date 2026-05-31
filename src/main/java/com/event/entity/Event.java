@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.CascadeType;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,13 +31,13 @@ public class Event {
     @ManyToOne
     public Location location;
 
-    @OneToOne(mappedBy = "event")
+    @OneToOne(mappedBy = "event", fetch = FetchType.LAZY)
     public EventDetail detail;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<Ticket> tickets;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     public List<Tag> tags;
 
     

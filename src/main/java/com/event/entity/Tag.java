@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.FetchType;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,6 @@ public class Tag {
 
     public String name;
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     public List<Event> events;
 }

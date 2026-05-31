@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ticket")
@@ -20,6 +21,8 @@ public class Ticket {
     public BigDecimal price;
     public Integer quantity;
 
+    @JsonIgnore
     @ManyToOne
     public Event event;
+    
 }
