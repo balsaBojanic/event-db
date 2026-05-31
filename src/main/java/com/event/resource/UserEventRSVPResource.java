@@ -21,7 +21,7 @@ public class UserEventRSVPResource {
     @Inject
     UserEventRSVPService rsvpService;
 
-    // POST /rsvp/user/1/event/1/status/GOING
+    
     @POST
     @Path("/user/{userId}/event/{eventId}/status/{status}")
     public Response save(
@@ -32,14 +32,14 @@ public class UserEventRSVPResource {
                        .status(201).build();
     }
 
-    // GET /rsvp/event/1
+    
     @GET
     @Path("/event/{eventId}")
     public List<UserEventRSVP> byEvent(@PathParam("eventId") Long eventId) {
         return rsvpService.findByEvent(eventId);
     }
 
-    // GET /rsvp/user/1
+    
     @GET
     @Path("/user/{userId}")
     public List<UserEventRSVP> byUser(@PathParam("userId") Long userId) {

@@ -5,6 +5,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Response;
+
+import com.event.service.TimezoneService;
 import java.util.List;
 
 @ApplicationScoped
@@ -27,4 +33,6 @@ public class UserService {
     public User findById(Long id) {
         return em.find(User.class, id);
     }
+    
+    
 }

@@ -1,31 +1,28 @@
 package com.event.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "user_profile")
-public class UserProfile {
+@Table(name = "timezone_info")
+public class TimeZoneInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    public String bio;
-    public String profilePictureUrl;
-    public String city;
-    public String country;
-    public String phoneNumber;
+    public String ipAddress;
+    public String timeZone;
+    public String currentLocalTime;
+    public String countryName;
+    public String cityName;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne
     public User user;
 }

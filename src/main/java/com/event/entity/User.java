@@ -9,6 +9,11 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 import java.util.List;
 
 @Entity
@@ -25,8 +30,11 @@ public class User {
     public String authProvider;
     public String externalId;
     public LocalDateTime createdAt;
-
+    @JsonIgnore
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     public UserProfile profile;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<TimeZoneInfo> timeZones;
  
 }

@@ -15,7 +15,7 @@ public class EventScheduler {
     @Inject
     EntityManager em;
 
-    // Runs every day at midnight
+    
     @Scheduled(cron = "0 0 0 * * ?")
     @Transactional
     public void logPastEvents() {
@@ -38,7 +38,7 @@ public class EventScheduler {
         System.out.println("=== END OF SCHEDULER REPORT ===");
     }
 
-    // Also runs every 5 minutes — useful for testing so you don't wait until midnight
+    
     @Scheduled(every = "5m")
     @Transactional
     public void checkUpcomingEvents() {
