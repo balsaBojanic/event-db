@@ -14,6 +14,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -63,7 +65,9 @@ public class EventResource {
     }
 
     @POST
+    @RolesAllowed("admin")
     public Response create(Event event) {
         return Response.ok(eventService.create(event)).status(201).build();
+        
     }
 }

@@ -11,6 +11,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.annotation.security.RolesAllowed;
 import java.util.List;
 
 @Path("/users")
@@ -33,6 +34,7 @@ public class UserResource {
     }
 
     @POST
+    @RolesAllowed("admin")
     public Response create(User user) {
         return Response.ok(userService.create(user)).status(201).build();
     }
